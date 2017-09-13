@@ -1,0 +1,6 @@
+Arbeitszimmer
+Badezimmer
+Flur
+Küche
+Schlafzimmer
+Wohnzimmer

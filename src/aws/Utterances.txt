@@ -1,0 +1,2 @@
+ventilateIntent Muss ich lüften
+roomVentilateIntent Muss ich im {room} lüften

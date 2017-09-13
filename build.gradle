@@ -1,0 +1,42 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.json:json:20141113'
+
+    compile 'org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.0'
+    compile 'org.apache.commons:commons-math3:3.2'
+
+    compile 'joda-time:joda-time:2.9.9'
+    compile 'com.amazon.alexa:alexa-skills-kit:1.5.0'
+
+    compile 'org.eclipse.jetty:jetty-server:9.0.6.v20130930'
+    compile 'org.eclipse.jetty:jetty-servlet:9.0.6.v20130930'
+
+    testCompile 'junit:junit:4.12'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'ventilate.Launcher',
+        )
+    }
+}
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    classifier = 'all'
+    from {
+        configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) }
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+    with jar
+}

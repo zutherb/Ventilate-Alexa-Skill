@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "intent": "ventilateIntent"
+    },
+    {
+      "intent": "roomVentilateIntent",
+      "slots": [
+        {
+          "name": "room",
+          "type": "ROOMS"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    }
+  ]
+}
