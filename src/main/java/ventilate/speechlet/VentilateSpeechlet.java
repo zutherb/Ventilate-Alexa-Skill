@@ -96,7 +96,16 @@ public class VentilateSpeechlet implements Speechlet {
         }
         if (forecastInMinutes >= 15) {
             double co2Value = (measures.isEmpty()) ? 0 : measures.get(measures.size() - 1).getCO2();
-            speech.setText(String.format("Du brauchst nicht zu lüften, denn der aktuelle CO2 Anteil beträgt %.1f ppm. Aber in %d Minuten solltest du mich wieder fragen!", co2Value, forecastInMinutes));
+            if (forecastInMinutes < 60){
+                speech.setText(String.format("Du brauchst nicht zu lüften, denn der aktuelle CO2 Anteil beträgt %.1f ppm. Aber in %d Minuten solltest du mich wieder fragen!", co2Value, forecastInMinutes));
+            } else {
+                long forecastInHours = forecastInMinutes / 60;
+                if (forecastInHours <= 1) {
+                    speech.setText(String.format("Du brauchst nicht zu lüften, denn der aktuelle CO2 Anteil beträgt %.1f ppm. Aber in einer Stunde solltest du mich wieder fragen!", co2Value));
+                } else {
+                    speech.setText(String.format("Du brauchst nicht zu lüften, denn der aktuelle CO2 Anteil beträgt %.1f ppm. Aber in %d Stunden solltest du mich wieder fragen!", co2Value, forecastInHours));
+                }
+            }
         }
         return SpeechletResponse.newAskResponse(speech, createRepromptSpeech());
     }
